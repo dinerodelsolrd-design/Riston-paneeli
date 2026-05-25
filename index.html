@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dinero del Sol – Energía Solar en República Dominicana</title>
+<title>Riston Paneeli – Energía Solar en República Dominicana</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -20,9 +20,7 @@
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
-
   html { scroll-behavior: smooth; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--blanco);
@@ -39,7 +37,6 @@
     flex-direction: column;
     overflow: hidden;
   }
-
   .hero-bg {
     position: absolute;
     inset: 0;
@@ -47,8 +44,6 @@
       radial-gradient(ellipse 80% 60% at 70% 20%, rgba(245,166,35,0.18) 0%, transparent 60%),
       radial-gradient(ellipse 50% 40% at 20% 80%, rgba(26,122,74,0.15) 0%, transparent 50%);
   }
-
-  /* Sun graphic */
   .sun-graphic {
     position: absolute;
     top: -80px;
@@ -72,6 +67,7 @@
     50%{ transform:scale(1.08); opacity:0.85; }
   }
 
+  /* ── NAV ── */
   nav {
     position: relative;
     z-index: 10;
@@ -88,7 +84,7 @@
     letter-spacing: -0.5px;
   }
   .logo span { color: #fff; }
-  nav a {
+  .nav-links a {
     color: rgba(255,255,255,0.75);
     text-decoration: none;
     font-size: 0.9rem;
@@ -96,8 +92,51 @@
     margin-left: 32px;
     transition: color .2s;
   }
-  nav a:hover { color: var(--sol); }
+  .nav-links a:hover { color: var(--sol); }
 
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 20;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--cielo);
+    z-index: 15;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    transition: color .2s;
+  }
+  .mobile-menu a:hover { color: var(--sol); }
+
+  /* ── HERO CONTENT ── */
   .hero-content {
     position: relative;
     z-index: 5;
@@ -108,7 +147,6 @@
     padding: 60px 60px 80px;
     max-width: 720px;
   }
-
   .hero-badge {
     display: inline-flex;
     align-items: center;
@@ -125,7 +163,6 @@
     margin-bottom: 28px;
     width: fit-content;
   }
-
   h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.8rem, 5vw, 4.2rem);
@@ -134,11 +171,7 @@
     line-height: 1.1;
     margin-bottom: 24px;
   }
-  h1 em {
-    font-style: normal;
-    color: var(--sol);
-  }
-
+  h1 em { font-style: normal; color: var(--sol); }
   .hero-sub {
     font-size: 1.15rem;
     color: rgba(255,255,255,0.72);
@@ -146,12 +179,7 @@
     margin-bottom: 44px;
     max-width: 560px;
   }
-
-  .hero-ctas {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
 
   .btn-primary {
     background: var(--sol);
@@ -172,7 +200,6 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(245,166,35,0.45);
   }
-
   .btn-secondary {
     background: transparent;
     color: #fff;
@@ -215,7 +242,7 @@
     font-weight: 400;
   }
 
-  /* ── SECTION GENERIC ── */
+  /* ── SECTIONS ── */
   section { padding: 100px 60px; }
   .section-tag {
     font-size: 0.78rem;
@@ -257,7 +284,6 @@
     background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, transparent 65%);
     pointer-events: none;
   }
-
   #calculadora .section-tag { color: var(--sol); }
   #calculadora .section-title { color: #fff; }
   #calculadora .section-sub { color: rgba(255,255,255,0.65); }
@@ -268,17 +294,13 @@
     gap: 40px;
     max-width: 1100px;
   }
-
   .calc-inputs {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 20px;
     padding: 40px;
   }
-
-  .input-group {
-    margin-bottom: 28px;
-  }
+  .input-group { margin-bottom: 28px; }
   .input-group label {
     display: block;
     font-size: 0.85rem;
@@ -287,9 +309,7 @@
     margin-bottom: 10px;
     letter-spacing: 0.3px;
   }
-  .input-wrapper {
-    position: relative;
-  }
+  .input-wrapper { position: relative; }
   .input-wrapper span {
     position: absolute;
     right: 16px;
@@ -314,9 +334,7 @@
     transition: border-color .2s;
     -webkit-appearance: none;
   }
-  .input-group input:focus, .input-group select:focus {
-    border-color: var(--sol);
-  }
+  .input-group input:focus, .input-group select:focus { border-color: var(--sol); }
   .input-group select option { background: var(--cielo-mid); color: #fff; }
 
   .slider-container { margin-top: 6px; }
@@ -337,7 +355,6 @@
     color: rgba(255,255,255,0.4);
     margin-top: 4px;
   }
-
   .calc-btn {
     width: 100%;
     background: var(--sol);
@@ -356,12 +373,7 @@
   .calc-btn:hover { background: var(--sol-deep); transform: translateY(-2px); }
 
   /* Results */
-  .calc-results {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
+  .calc-results { display: flex; flex-direction: column; gap: 20px; }
   .result-hero {
     background: linear-gradient(135deg, var(--sol) 0%, var(--sol-deep) 100%);
     border-radius: 20px;
@@ -393,17 +405,9 @@
     color: var(--cielo);
     line-height: 1;
   }
-  .result-hero-sub {
-    font-size: 0.9rem;
-    color: rgba(10,37,64,0.65);
-    margin-top: 8px;
-  }
+  .result-hero-sub { font-size: 0.9rem; color: rgba(10,37,64,0.65); margin-top: 8px; }
 
-  .result-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
+  .result-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .result-card {
     background: rgba(255,255,255,0.05);
     border: 1px solid rgba(255,255,255,0.1);
@@ -472,16 +476,8 @@
 
   /* ── HOW IT WORKS ── */
   #como-funciona { background: var(--blanco); }
-
-  .steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
-    max-width: 1100px;
-  }
-  .step {
-    position: relative;
-  }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; }
+  .step { position: relative; }
   .step-num {
     font-family: 'Playfair Display', serif;
     font-size: 4rem;
@@ -509,26 +505,17 @@
     color: var(--cielo);
   }
   .step p { font-size: 0.9rem; color: var(--gris); line-height: 1.65; }
-
   .step-connector {
     position: absolute;
-    top: 80px;
-    right: -16px;
-    width: 32px;
-    height: 2px;
+    top: 80px; right: -16px;
+    width: 32px; height: 2px;
     background: linear-gradient(90deg, var(--sol) 0%, transparent 100%);
   }
   .step:last-child .step-connector { display: none; }
 
   /* ── WHY SOLAR ── */
   #por-que { background: var(--sol-light); }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    max-width: 1100px;
-  }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; }
   .benefit-card {
     background: #fff;
     border-radius: 20px;
@@ -537,16 +524,8 @@
     transition: transform .2s, box-shadow .2s;
     border-top: 4px solid transparent;
   }
-  .benefit-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px var(--sombra);
-    border-top-color: var(--sol);
-  }
-  .benefit-card.featured {
-    background: var(--cielo);
-    color: #fff;
-    border-top-color: var(--sol);
-  }
+  .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px var(--sombra); border-top-color: var(--sol); }
+  .benefit-card.featured { background: var(--cielo); color: #fff; border-top-color: var(--sol); }
   .benefit-icon { font-size: 2.2rem; margin-bottom: 20px; }
   .benefit-card h3 {
     font-family: 'Playfair Display', serif;
@@ -571,70 +550,26 @@
     color: #fff;
   }
   .reliability-banner .icon { font-size: 3rem; flex-shrink: 0; }
-  .reliability-banner h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
+  .reliability-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
   .reliability-banner p { font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.65; }
 
   /* ── FINANCING ── */
   #financiamiento { background: #fff; }
-
-  .financing-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1100px;
-    align-items: center;
-  }
-
-  .loan-card {
-    background: var(--cielo);
-    border-radius: 24px;
-    padding: 48px;
-    color: #fff;
-  }
-  .loan-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 24px;
-    color: var(--sol);
-  }
-  .loan-feature {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 20px;
-  }
+  .financing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; align-items: center; }
+  .loan-card { background: var(--cielo); border-radius: 24px; padding: 48px; color: #fff; }
+  .loan-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 24px; color: var(--sol); }
+  .loan-feature { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
   .loan-feature-icon {
     width: 36px; height: 36px;
     background: rgba(245,166,35,0.15);
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
   }
   .loan-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
   .loan-feature p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
-
-  .financing-text h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--cielo);
-    margin-bottom: 16px;
-  }
-  .financing-text p {
-    font-size: 0.95rem;
-    color: var(--gris);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
+  .financing-text h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--cielo); margin-bottom: 16px; }
+  .financing-text p { font-size: 0.95rem; color: var(--gris); line-height: 1.7; margin-bottom: 20px; }
   .interest-note {
     background: var(--verde-light);
     border-left: 4px solid var(--verde);
@@ -645,18 +580,10 @@
   .interest-note p { font-size: 0.88rem; color: var(--verde); font-weight: 500; margin: 0; }
 
   /* ── CONTACT ── */
-  #contacto {
-    background: var(--cielo);
-    text-align: center;
-    padding: 100px 60px;
-  }
+  #contacto { background: var(--cielo); text-align: center; padding: 100px 60px; }
   #contacto .section-tag { color: var(--sol); }
   #contacto .section-title { color: #fff; }
-  #contacto .section-sub {
-    color: rgba(255,255,255,0.65);
-    margin: 0 auto 48px;
-  }
-
+  #contacto .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 48px; }
   .contact-form {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
@@ -666,11 +593,7 @@
     margin: 0 auto;
     text-align: left;
   }
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { margin-bottom: 20px; }
   .form-group label {
     display: block;
@@ -694,9 +617,7 @@
     transition: border-color .2s;
     -webkit-appearance: none;
   }
-  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--sol);
-  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sol); }
   .form-group textarea { resize: vertical; min-height: 100px; }
   .form-group select option { background: var(--cielo-mid); }
 
@@ -719,14 +640,13 @@
     transform: translateY(28px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* ── RESPONSIVE ── */
   @media (max-width: 900px) {
     nav { padding: 24px 28px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
     section { padding: 70px 28px; }
     #calculadora { padding: 70px 28px; }
     .hero-content { padding: 60px 28px 60px; }
@@ -757,21 +677,31 @@
   <div class="sun-graphic"></div>
 
   <nav>
-    <div class="logo">Dinero<span> del Sol</span></div>
-    <div>
+    <div class="logo">Riston<span> Paneeli</span></div>
+    <div class="nav-links">
       <a href="#calculadora">Calculadora</a>
       <a href="#por-que">¿Por qué solar?</a>
       <a href="#financiamiento">Financiamiento</a>
       <a href="#contacto">Contacto</a>
     </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#calculadora" onclick="toggleMenu()">Calculadora</a>
+    <a href="#por-que" onclick="toggleMenu()">¿Por qué solar?</a>
+    <a href="#financiamiento" onclick="toggleMenu()">Financiamiento</a>
+    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  </div>
 
   <div class="hero-content">
     <div class="hero-badge">☀️ República Dominicana</div>
     <h1>Tu techo genera<br><em>dinero cada día.</em></h1>
     <p class="hero-sub">
-      Instala paneles solares y convierte el sol dominicano en ahorro real. 
-      La electricidad sobrante va a la red y la recuperas cuando la necesitas — 
+      Instala paneles solares y convierte el sol dominicano en ahorro real.
+      La electricidad sobrante va a la red y la recuperas cuando la necesitas —
       como un banco de energía gratuito. Con financiamiento garantizado.
     </p>
     <div class="hero-ctas">
@@ -807,7 +737,6 @@
   <p class="section-sub">Ingresa tu consumo mensual y te mostramos el sistema ideal, el costo real y en cuánto tiempo recuperas tu inversión.</p>
 
   <div class="calc-grid">
-    <!-- Inputs -->
     <div class="calc-inputs">
       <div class="input-group">
         <label>Consumo mensual promedio (kWh)</label>
@@ -820,7 +749,6 @@
           <div class="slider-labels"><span>50 kWh</span><span>3,000 kWh</span></div>
         </div>
       </div>
-
       <div class="input-group">
         <label>Tipo de cliente</label>
         <div class="input-wrapper">
@@ -832,7 +760,6 @@
           </select>
         </div>
       </div>
-
       <div class="input-group">
         <label>Tarifa eléctrica que pagas (RD$/kWh)</label>
         <div class="input-wrapper">
@@ -841,7 +768,6 @@
         </div>
         <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;margin-top:6px;display:block;">Promedio residencial ~RD$7.50/kWh · Comercial ~RD$11/kWh</small>
       </div>
-
       <div class="input-group">
         <label>¿Quieres incluir batería de respaldo?</label>
         <div class="input-wrapper">
@@ -852,23 +778,20 @@
           </select>
         </div>
       </div>
-
       <div class="input-group">
         <label>Financiamiento deseado</label>
         <div class="input-wrapper">
           <select id="financiamiento-tipo">
             <option value="propio">Pago de contado (sin crédito)</option>
-            <option value="30">Préstamo a 3 años (36 meses)</option>
+            <option value="36">Préstamo a 3 años (36 meses)</option>
             <option value="60">Préstamo a 5 años (60 meses)</option>
             <option value="84">Préstamo a 7 años (84 meses)</option>
           </select>
         </div>
       </div>
-
       <button class="calc-btn" onclick="calcular()">☀️ Calcular mi sistema solar</button>
     </div>
 
-    <!-- Results -->
     <div class="calc-results" id="resultados">
       <div class="result-placeholder">
         <div class="ph-icon">☀️</div>
@@ -876,7 +799,6 @@
       </div>
     </div>
   </div>
-
   <p style="color:rgba(255,255,255,0.3);font-size:0.78rem;margin-top:32px;">* Estimaciones basadas en precios de mercado 2025–2026. Cotización final según inspección técnica. Precios en USD.</p>
 </section>
 
@@ -885,7 +807,6 @@
   <div class="section-tag">El proceso</div>
   <h2 class="section-title">De cero a energía propia<br>en 4 pasos</h2>
   <p class="section-sub">Sin complicaciones. Nosotros manejamos todo — desde el diseño hasta la conexión con la red eléctrica.</p>
-
   <div class="steps-grid">
     <div class="step fade-in">
       <div class="step-num">01</div>
@@ -922,7 +843,6 @@
   <div class="section-tag">Argumentos clave</div>
   <h2 class="section-title">El sol dominicano trabaja<br>para ti, no para la EDE</h2>
   <p class="section-sub">La República Dominicana tiene 6+ horas de sol diario todo el año. Eso es dinero que hoy estás dejando ir.</p>
-
   <div class="benefits-grid">
     <div class="benefit-card fade-in">
       <div class="benefit-icon">📉</div>
@@ -955,18 +875,11 @@
       <p>La Ley 57-07 otorga exención del 100% de impuestos de importación en equipos solares. El Estado dominicano apoya esta transición.</p>
     </div>
   </div>
-
-  <!-- Reliability banner -->
   <div class="reliability-banner fade-in">
     <div class="icon">🔋</div>
     <div>
       <h3>¿Y los apagones? Tenemos la solución.</h3>
-      <p>
-        Ofrecemos baterías de respaldo integradas al sistema solar. Cuando la red falla — y en RD sabemos que puede fallar —
-        tus baterías entran automáticamente en segundos. Sin generador ruidoso, sin gasoil, sin cortes que dañen equipos.
-        Para hogares: autonomía de 6–12 horas. Para hoteles: sistemas de respaldo que protegen operaciones críticas 24/7.
-        <strong style="color:#fff;">La confiabilidad ya no es opcional — es parte del paquete.</strong>
-      </p>
+      <p>Ofrecemos baterías de respaldo integradas al sistema solar. Cuando la red falla — y en RD sabemos que puede fallar — tus baterías entran automáticamente en segundos. Sin generador ruidoso, sin gasoil, sin cortes que dañen equipos. Para hogares: autonomía de 6–12 horas. Para hoteles: sistemas de respaldo que protegen operaciones críticas 24/7. <strong style="color:#fff;">La confiabilidad ya no es opcional — es parte del paquete.</strong></p>
     </div>
   </div>
 </section>
@@ -976,11 +889,9 @@
   <div class="section-tag">Financiamiento</div>
   <h2 class="section-title">Paga con el ahorro<br>que el sistema genera</h2>
   <p class="section-sub">No necesitas el capital completo hoy. Nuestro préstamo garantizado está diseñado para que tu cuota mensual sea menor que lo que ahorras en electricidad.</p>
-
   <div class="financing-grid">
     <div class="loan-card">
       <h3>Préstamo Solar Garantizado</h3>
-
       <div class="loan-feature">
         <div class="loan-feature-icon">🏠</div>
         <div>
@@ -988,7 +899,6 @@
           <p>El mismo sistema solar sirve como garantía. Proceso simple y rápido.</p>
         </div>
       </div>
-
       <div class="loan-feature">
         <div class="loan-feature-icon">📅</div>
         <div>
@@ -996,7 +906,6 @@
           <p>Elige el plazo que mejor se adapta a tu flujo de caja. Cuotas fijas en USD o RD$.</p>
         </div>
       </div>
-
       <div class="loan-feature">
         <div class="loan-feature-icon">💵</div>
         <div>
@@ -1004,7 +913,6 @@
           <p>Trabajamos con tasas de 8%–12% anual según perfil. Mucho menos que el costo de seguir pagando la EDE.</p>
         </div>
       </div>
-
       <div class="loan-feature">
         <div class="loan-feature-icon">⚡</div>
         <div>
@@ -1012,7 +920,6 @@
           <p>Proceso digitalizado. Mínima papelería. Comenzamos la instalación en cuanto aprueba.</p>
         </div>
       </div>
-
       <div class="loan-feature">
         <div class="loan-feature-icon">🤝</div>
         <div>
@@ -1021,23 +928,13 @@
         </div>
       </div>
     </div>
-
     <div class="financing-text">
       <h3>La lógica es simple:<br>el sol paga el préstamo.</h3>
-      <p>
-        Imagina que hoy pagas <strong>RD$8,000 al mes</strong> en electricidad. 
-        Con nuestro sistema, tu factura baja a <strong>RD$800</strong>. 
-        Eso son RD$7,200 libres cada mes — más que suficiente para cubrir la cuota del préstamo.
-      </p>
-      <p>
-        En la mayoría de los casos, el flujo de caja es positivo desde el primer mes. 
-        No estás gastando dinero — estás moviendo dinero de la EDE a tu propio patrimonio.
-      </p>
-
+      <p>Imagina que hoy pagas <strong>RD$8,000 al mes</strong> en electricidad. Con nuestro sistema, tu factura baja a <strong>RD$800</strong>. Eso son RD$7,200 libres cada mes — más que suficiente para cubrir la cuota del préstamo.</p>
+      <p>En la mayoría de los casos, el flujo de caja es positivo desde el primer mes. No estás gastando dinero — estás moviendo dinero de la EDE a tu propio patrimonio.</p>
       <div class="interest-note">
         <p>💡 <strong>Tip financiero:</strong> Con tasas de entre 8% y 12%, y un sistema que te ahorra 70–90% en electricidad, el retorno de inversión supera cualquier depósito bancario disponible en RD hoy.</p>
       </div>
-
       <a href="#contacto" class="btn-primary" style="display:inline-block;">Solicitar pre-aprobación →</a>
     </div>
   </div>
@@ -1048,7 +945,6 @@
   <div class="section-tag">Contáctanos</div>
   <h2 class="section-title">Empecemos hoy</h2>
   <p class="section-sub">Completa el formulario y un asesor te contacta en menos de 24 horas. Sin compromiso.</p>
-
   <div class="contact-form">
     <div class="form-row">
       <div class="form-group">
@@ -1090,14 +986,18 @@
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <div class="logo">Dinero<span> del Sol</span></div>
-  <p>© 2026 Dinero del Sol · República Dominicana · Energía Solar Fotovoltaica</p>
+  <div class="logo">Riston<span> Paneeli</span></div>
+  <p>© 2026 Riston Paneeli · República Dominicana · Energía Solar Fotovoltaica</p>
   <p style="color:rgba(255,255,255,0.25);">Ley 57-07 · SIE-007-2026-REG · Instaladores certificados</p>
 </footer>
 
 <!-- ═══════════════ SCRIPT ═══════════════ -->
 <script>
-  // Sync slider with input
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
   const consumoInput = document.getElementById('consumo');
   const consumoSlider = document.getElementById('consumo-slider');
   consumoSlider.addEventListener('input', () => { consumoInput.value = consumoSlider.value; });
@@ -1105,107 +1005,72 @@
     if(consumoInput.value >= 50 && consumoInput.value <= 3000) consumoSlider.value = consumoInput.value;
   });
 
-  // ── CALCULATOR LOGIC ──
   function calcular() {
     const consumo = parseFloat(document.getElementById('consumo').value) || 450;
     const tarifa = parseFloat(document.getElementById('tarifa').value) || 7.50;
-    const tipoCliente = document.getElementById('tipo-cliente').value;
     const bateria = document.getElementById('bateria').value;
     const financiamientoTipo = document.getElementById('financiamiento-tipo').value;
 
-    // System sizing
-    // Average 6.3 peak sun hours, 0.8 system efficiency, generate 10% extra
     const psh = 6.3;
     const efficiency = 0.80;
-    const kWpNeeded = (consumo / 30) / (psh * efficiency); // kWp
-    const paneles = Math.ceil(kWpNeeded / 0.55); // 550W panels
+    const kWpNeeded = (consumo / 30) / (psh * efficiency);
+    const paneles = Math.ceil(kWpNeeded / 0.55);
     const kWpSystem = (paneles * 0.55).toFixed(2);
 
-    // Cost breakdown (USD, imported from China + local installation)
-    // Panel cost: ~$0.22/W imported + freight
-    const costoPaneles = paneles * 550 * 0.25; // $0.25/W all-in landed
-    // Inverter: ~$0.08/W
+    const costoPaneles = paneles * 550 * 0.25;
     const costoInversor = kWpNeeded * 1000 * 0.10;
-    // Structure + wiring + misc: ~$0.12/W
     const costoEstructura = kWpNeeded * 1000 * 0.14;
-    // Installation labor in RD: ~$0.18/W (local labor, relatively cheap)
     const costoInstalacion = kWpNeeded * 1000 * 0.20;
 
     let costoBateria = 0;
     let bateriaDesc = '';
-    if (bateria === 'basica') {
-      costoBateria = 1800; // 8kWh LFP battery system
-      bateriaDesc = 'Batería 8 kWh (respaldo ~6h)';
-    } else if (bateria === 'ampliada') {
-      costoBateria = 3400; // 16kWh
-      bateriaDesc = 'Batería 16 kWh (respaldo ~12h)';
-    }
+    if (bateria === 'basica') { costoBateria = 1800; bateriaDesc = 'Batería 8 kWh (respaldo ~6h)'; }
+    else if (bateria === 'ampliada') { costoBateria = 3400; bateriaDesc = 'Batería 16 kWh (respaldo ~12h)'; }
 
     const costoTotal = costoPaneles + costoInversor + costoEstructura + costoInstalacion + costoBateria;
-    const costoTotalRD = costoTotal * 58.5; // approximate USD to RD$ rate
-
-    // Savings
-    // Monthly bill now
+    const costoTotalRD = costoTotal * 58.5;
     const facturaActual = consumo * tarifa;
-    // After solar: assume 80% coverage (20% residual from night/cloudy)
-    const cobertura = 0.80;
-    const ahorroMensualRD = facturaActual * cobertura;
-    const ahorroAnualRD = ahorroMensualRD * 12;
-    const ahorroAnualUSD = ahorroAnualRD / 58.5;
-
-    // Payback
+    const ahorroMensualRD = facturaActual * 0.80;
+    const ahorroAnualUSD = (ahorroMensualRD * 12) / 58.5;
     const paybackYears = costoTotal / ahorroAnualUSD;
-
-    // 25 year savings
     const ahorro25USD = (ahorroAnualUSD * 25 - costoTotal).toFixed(0);
 
-    // Financing
     let cuotaMensual = null;
     let cuotaLabel = '';
     if (financiamientoTipo !== 'propio') {
       const meses = parseInt(financiamientoTipo);
-      const tasaAnual = 0.10; // 10% annual
-      const tasaMensual = tasaAnual / 12;
+      const tasaMensual = 0.10 / 12;
       cuotaMensual = costoTotal * (tasaMensual * Math.pow(1 + tasaMensual, meses)) / (Math.pow(1 + tasaMensual, meses) - 1);
       cuotaLabel = `Cuota mensual a ${meses/12} años (10% anual)`;
     }
 
-    // Render
-    const div = document.getElementById('resultados');
-
-    const paybackText = paybackYears < 1 
-      ? `${Math.round(paybackYears * 12)} meses`
-      : `${paybackYears.toFixed(1)} años`;
+    const paybackText = paybackYears < 1 ? `${Math.round(paybackYears * 12)} meses` : `${paybackYears.toFixed(1)} años`;
 
     const financingHTML = cuotaMensual ? `
       <div class="financing-note">
         <h4>💳 ${cuotaLabel}</h4>
         <div class="monthly-payment">USD $${cuotaMensual.toFixed(0)}/mes</div>
         <p style="margin-top:8px;">Tu ahorro estimado es <strong style="color:#5AE090;">RD$${Math.round(ahorroMensualRD).toLocaleString()}/mes</strong> (≈USD $${Math.round(ahorroMensualRD/58.5)}) — superior a la cuota desde el primer mes.</p>
-      </div>
-    ` : `
+      </div>` : `
       <div class="financing-note">
         <h4>✅ Pago de contado</h4>
         <p>Recuperas tu inversión en <strong style="color:#5AE090;">${paybackText}</strong>. Luego, energía prácticamente gratis por 20+ años más.</p>
         <p style="margin-top:10px;">¿Prefieres financiamiento? Cámbialo arriba y recalcula.</p>
-      </div>
-    `;
+      </div>`;
 
     const bateriaHTML = bateria !== 'no' ? `
       <div class="result-card" style="grid-column:1/-1;">
         <div class="result-card-icon">🔋</div>
         <div class="result-card-label">Respaldo incluido</div>
         <div class="result-card-value" style="font-size:1rem;color:rgba(255,255,255,0.8);">${bateriaDesc} — protección automática ante apagones</div>
-      </div>
-    ` : '';
+      </div>` : '';
 
-    div.innerHTML = `
+    document.getElementById('resultados').innerHTML = `
       <div class="result-hero">
         <div class="result-hero-label">Recuperas tu inversión en</div>
         <div class="result-hero-value">${paybackText}</div>
         <div class="result-hero-sub">Luego, energía casi gratis por 20+ años</div>
       </div>
-
       <div class="result-cards">
         <div class="result-card">
           <div class="result-card-icon">⚡</div>
@@ -1233,22 +1098,14 @@
         </div>
         ${bateriaHTML}
       </div>
-
-      ${financingHTML}
-    `;
+      ${financingHTML}`;
 
     document.getElementById('resultados').scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 
-  // ── INTERSECTION OBSERVER for animations ──
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.15 });
-
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
