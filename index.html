@@ -18,631 +18,208 @@
     --gris: #6B7280;
     --sombra: rgba(10,37,64,0.12);
   }
-
   * { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--blanco);
-    color: var(--cielo);
-    overflow-x: hidden;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--blanco); color: var(--cielo); overflow-x: hidden; }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    background: var(--cielo);
-    position: relative;
+  /* LANG SWITCHER */
+  .lang-switcher {
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
+    gap: 4px;
+    align-items: center;
   }
+  .lang-btn {
+    background: transparent;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .lang-btn.active {
+    background: var(--sol);
+    border-color: var(--sol);
+    color: var(--cielo);
+  }
+  .lang-btn:hover:not(.active) { border-color: var(--sol); color: var(--sol); }
+
+  /* HERO */
+  .hero { min-height: 100vh; background: var(--cielo); position: relative; display: flex; flex-direction: column; overflow: hidden; }
   .hero-bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(245,166,35,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 40% at 20% 80%, rgba(26,122,74,0.15) 0%, transparent 50%);
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(245,166,35,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 20% 80%, rgba(26,122,74,0.15) 0%, transparent 50%);
   }
   .sun-graphic {
-    position: absolute;
-    top: -80px;
-    right: -80px;
-    width: 420px;
-    height: 420px;
+    position: absolute; top: -80px; right: -80px; width: 420px; height: 420px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(245,166,35,0.35) 0%, rgba(245,166,35,0.08) 50%, transparent 70%);
     animation: pulse-sun 4s ease-in-out infinite;
   }
   .sun-graphic::after {
-    content:'';
-    position:absolute;
-    inset:60px;
-    border-radius:50%;
+    content:''; position:absolute; inset:60px; border-radius:50%;
     background: radial-gradient(circle, rgba(245,166,35,0.5) 0%, rgba(245,166,35,0.1) 70%);
     animation: pulse-sun 4s ease-in-out infinite reverse;
   }
-  @keyframes pulse-sun {
-    0%,100%{ transform:scale(1); opacity:1; }
-    50%{ transform:scale(1.08); opacity:0.85; }
-  }
+  @keyframes pulse-sun { 0%,100%{ transform:scale(1); opacity:1; } 50%{ transform:scale(1.08); opacity:0.85; } }
 
-  /* ── NAV ── */
-  nav {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 28px 60px;
-  }
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--sol);
-    letter-spacing: -0.5px;
-  }
+  /* NAV */
+  nav { position: relative; z-index: 10; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--sol); letter-spacing: -0.5px; }
   .logo span { color: #fff; }
-  .nav-links a {
-    color: rgba(255,255,255,0.75);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-left: 32px;
-    transition: color .2s;
-  }
+  .nav-right { display: flex; align-items: center; gap: 24px; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; margin-left: 32px; transition: color .2s; }
   .nav-links a:hover { color: var(--sol); }
-
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    z-index: 20;
-  }
-  .hamburger span {
-    display: block;
-    width: 26px;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all .3s;
-  }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; z-index: 20; }
+  .hamburger span { display: block; width: 26px; height: 2px; background: #fff; border-radius: 2px; transition: all .3s; }
   .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .hamburger.open span:nth-child(2) { opacity: 0; }
   .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-  .mobile-menu {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: var(--cielo);
-    z-index: 15;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-  }
+  .mobile-menu { display: none; position: fixed; inset: 0; background: var(--cielo); z-index: 15; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.6rem;
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    transition: color .2s;
-  }
+  .mobile-menu a { color: #fff; text-decoration: none; font-size: 1.6rem; font-family: 'Playfair Display', serif; font-weight: 700; transition: color .2s; }
   .mobile-menu a:hover { color: var(--sol); }
+  .mobile-menu .lang-switcher { margin-top: 20px; }
+  .mobile-menu .lang-btn { font-size: 1rem; padding: 8px 18px; }
 
-  /* ── HERO CONTENT ── */
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 60px 60px 80px;
-    max-width: 720px;
-  }
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(245,166,35,0.15);
-    border: 1px solid rgba(245,166,35,0.4);
-    color: var(--sol);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 100px;
-    margin-bottom: 28px;
-    width: fit-content;
-  }
-  h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
+  /* HERO CONTENT */
+  .hero-content { position: relative; z-index: 5; flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 60px 60px 80px; max-width: 720px; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.4); color: var(--sol); font-size: 0.8rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; width: fit-content; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 24px; }
   h1 em { font-style: normal; color: var(--sol); }
-  .hero-sub {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.72);
-    line-height: 1.7;
-    margin-bottom: 44px;
-    max-width: 560px;
-  }
+  .hero-sub { font-size: 1.15rem; color: rgba(255,255,255,0.72); line-height: 1.7; margin-bottom: 44px; max-width: 560px; }
   .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
-
-  .btn-primary {
-    background: var(--sol);
-    color: var(--cielo);
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 16px 36px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background .2s, transform .15s, box-shadow .2s;
-    box-shadow: 0 4px 24px rgba(245,166,35,0.35);
-  }
-  .btn-primary:hover {
-    background: var(--sol-deep);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(245,166,35,0.45);
-  }
-  .btn-secondary {
-    background: transparent;
-    color: #fff;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 16px 36px;
-    border-radius: 8px;
-    border: 1.5px solid rgba(255,255,255,0.35);
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: border-color .2s, color .2s;
-  }
+  .btn-primary { background: var(--sol); color: var(--cielo); font-weight: 700; font-size: 1rem; padding: 16px 36px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s, transform .15s, box-shadow .2s; box-shadow: 0 4px 24px rgba(245,166,35,0.35); }
+  .btn-primary:hover { background: var(--sol-deep); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(245,166,35,0.45); }
+  .btn-secondary { background: transparent; color: #fff; font-weight: 600; font-size: 1rem; padding: 16px 36px; border-radius: 8px; border: 1.5px solid rgba(255,255,255,0.35); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color .2s, color .2s; }
   .btn-secondary:hover { border-color: var(--sol); color: var(--sol); }
 
-  /* Stats bar */
-  .stats-bar {
-    position: relative;
-    z-index: 5;
-    display: flex;
-    gap: 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .stat-item {
-    flex: 1;
-    padding: 24px 40px;
-    border-right: 1px solid rgba(255,255,255,0.1);
-  }
+  /* STATS */
+  .stats-bar { position: relative; z-index: 5; display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat-item { flex: 1; padding: 24px 40px; border-right: 1px solid rgba(255,255,255,0.1); }
   .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--sol);
-  }
-  .stat-label {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.55);
-    margin-top: 2px;
-    font-weight: 400;
-  }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--sol); }
+  .stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 2px; font-weight: 400; }
 
-  /* ── SECTIONS ── */
+  /* SECTIONS */
   section { padding: 100px 60px; }
-  .section-tag {
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--verde);
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 700;
-    color: var(--cielo);
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-  .section-sub {
-    font-size: 1.05rem;
-    color: var(--gris);
-    line-height: 1.7;
-    max-width: 560px;
-    margin-bottom: 60px;
-  }
+  .section-tag { font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde); margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--cielo); line-height: 1.2; margin-bottom: 16px; }
+  .section-sub { font-size: 1.05rem; color: var(--gris); line-height: 1.7; max-width: 560px; margin-bottom: 60px; }
 
-  /* ── CALCULATOR ── */
-  #calculadora {
-    background: var(--cielo);
-    padding: 100px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  #calculadora::before {
-    content:'';
-    position:absolute;
-    top:-200px; right:-200px;
-    width:600px; height:600px;
-    border-radius:50%;
-    background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, transparent 65%);
-    pointer-events: none;
-  }
+  /* CALCULATOR */
+  #calculadora { background: var(--cielo); padding: 100px 60px; position: relative; overflow: hidden; }
+  #calculadora::before { content:''; position:absolute; top:-200px; right:-200px; width:600px; height:600px; border-radius:50%; background: radial-gradient(circle, rgba(245,166,35,0.1) 0%, transparent 65%); pointer-events: none; }
   #calculadora .section-tag { color: var(--sol); }
   #calculadora .section-title { color: #fff; }
   #calculadora .section-sub { color: rgba(255,255,255,0.65); }
-
-  .calc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1100px;
-  }
-  .calc-inputs {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 40px;
-  }
+  .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; }
+  .calc-inputs { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 40px; }
   .input-group { margin-bottom: 28px; }
-  .input-group label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 10px;
-    letter-spacing: 0.3px;
-  }
+  .input-group label { display: block; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 10px; letter-spacing: 0.3px; }
   .input-wrapper { position: relative; }
-  .input-wrapper span {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--sol);
-    font-weight: 600;
-    font-size: 0.9rem;
-    pointer-events: none;
-  }
-  .input-group input, .input-group select {
-    width: 100%;
-    background: rgba(255,255,255,0.08);
-    border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 10px;
-    padding: 14px 48px 14px 18px;
-    color: #fff;
-    font-size: 1.05rem;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 500;
-    outline: none;
-    transition: border-color .2s;
-    -webkit-appearance: none;
-  }
+  .input-wrapper span { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--sol); font-weight: 600; font-size: 0.9rem; pointer-events: none; }
+  .input-group input, .input-group select { width: 100%; background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 48px 14px 18px; color: #fff; font-size: 1.05rem; font-family: 'DM Sans', sans-serif; font-weight: 500; outline: none; transition: border-color .2s; -webkit-appearance: none; }
   .input-group input:focus, .input-group select:focus { border-color: var(--sol); }
   .input-group select option { background: var(--cielo-mid); color: #fff; }
-
   .slider-container { margin-top: 6px; }
-  .slider-container input[type=range] {
-    width: 100%;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    accent-color: var(--sol);
-    height: 6px;
-    margin-top: 12px;
-  }
-  .slider-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.4);
-    margin-top: 4px;
-  }
-  .calc-btn {
-    width: 100%;
-    background: var(--sol);
-    color: var(--cielo);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    padding: 18px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background .2s, transform .15s;
-    box-shadow: 0 4px 24px rgba(245,166,35,0.3);
-  }
+  .slider-container input[type=range] { width: 100%; padding: 0; border: none; background: none; cursor: pointer; accent-color: var(--sol); height: 6px; margin-top: 12px; }
+  .slider-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .calc-btn { width: 100%; background: var(--sol); color: var(--cielo); font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.05rem; padding: 18px; border-radius: 12px; border: none; cursor: pointer; margin-top: 8px; transition: background .2s, transform .15s; box-shadow: 0 4px 24px rgba(245,166,35,0.3); }
   .calc-btn:hover { background: var(--sol-deep); transform: translateY(-2px); }
 
-  /* Results */
+  /* RESULTS */
   .calc-results { display: flex; flex-direction: column; gap: 20px; }
-  .result-hero {
-    background: linear-gradient(135deg, var(--sol) 0%, var(--sol-deep) 100%);
-    border-radius: 20px;
-    padding: 36px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .result-hero::before {
-    content:'';
-    position:absolute;
-    top:-30px; right:-30px;
-    width:120px; height:120px;
-    border-radius:50%;
-    background: rgba(255,255,255,0.1);
-  }
-  .result-hero-label {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: rgba(10,37,64,0.7);
-    margin-bottom: 8px;
-  }
-  .result-hero-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: var(--cielo);
-    line-height: 1;
-  }
+  .result-hero { background: linear-gradient(135deg, var(--sol) 0%, var(--sol-deep) 100%); border-radius: 20px; padding: 36px; text-align: center; position: relative; overflow: hidden; }
+  .result-hero::before { content:''; position:absolute; top:-30px; right:-30px; width:120px; height:120px; border-radius:50%; background: rgba(255,255,255,0.1); }
+  .result-hero-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(10,37,64,0.7); margin-bottom: 8px; }
+  .result-hero-value { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--cielo); line-height: 1; }
   .result-hero-sub { font-size: 0.9rem; color: rgba(10,37,64,0.65); margin-top: 8px; }
-
   .result-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .result-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px;
-    padding: 24px;
-    transition: border-color .2s;
-  }
+  .result-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; transition: border-color .2s; }
   .result-card:hover { border-color: rgba(245,166,35,0.4); }
   .result-card-icon { font-size: 1.5rem; margin-bottom: 10px; }
-  .result-card-label {
-    font-size: 0.78rem;
-    color: rgba(255,255,255,0.5);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
-  .result-card-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-  }
+  .result-card-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .result-card-value { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; }
   .result-card-value.accent { color: var(--sol); }
-
-  .result-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    color: rgba(255,255,255,0.35);
-    gap: 16px;
-    padding: 40px;
-    border: 2px dashed rgba(255,255,255,0.1);
-    border-radius: 20px;
-  }
+  .result-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; color: rgba(255,255,255,0.35); gap: 16px; padding: 40px; border: 2px dashed rgba(255,255,255,0.1); border-radius: 20px; }
   .result-placeholder .ph-icon { font-size: 3rem; opacity: 0.4; }
   .result-placeholder p { font-size: 0.95rem; line-height: 1.6; }
-
-  .financing-note {
-    background: rgba(26,122,74,0.15);
-    border: 1px solid rgba(26,122,74,0.3);
-    border-radius: 16px;
-    padding: 24px;
-    color: #fff;
-  }
-  .financing-note h4 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #5AE090;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .financing-note { background: rgba(26,122,74,0.15); border: 1px solid rgba(26,122,74,0.3); border-radius: 16px; padding: 24px; color: #fff; }
+  .financing-note h4 { font-size: 0.9rem; font-weight: 700; color: #5AE090; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .financing-note p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.6; }
-  .financing-note .monthly-payment {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #5AE090;
-    margin-top: 8px;
-    font-weight: 700;
-  }
+  .financing-note .monthly-payment { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #5AE090; margin-top: 8px; font-weight: 700; }
 
-  /* ── HOW IT WORKS ── */
+  /* HOW IT WORKS */
   #como-funciona { background: var(--blanco); }
   .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; max-width: 1100px; }
   .step { position: relative; }
-  .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-weight: 900;
-    color: var(--sol-light);
-    line-height: 1;
-    margin-bottom: -16px;
-  }
-  .step-icon {
-    width: 56px; height: 56px;
-    background: var(--sol);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    position: relative;
-  }
-  .step h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--cielo);
-  }
+  .step-num { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; color: var(--sol-light); line-height: 1; margin-bottom: -16px; }
+  .step-icon { width: 56px; height: 56px; background: var(--sol); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 20px; position: relative; }
+  .step h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: var(--cielo); }
   .step p { font-size: 0.9rem; color: var(--gris); line-height: 1.65; }
-  .step-connector {
-    position: absolute;
-    top: 80px; right: -16px;
-    width: 32px; height: 2px;
-    background: linear-gradient(90deg, var(--sol) 0%, transparent 100%);
-  }
+  .step-connector { position: absolute; top: 80px; right: -16px; width: 32px; height: 2px; background: linear-gradient(90deg, var(--sol) 0%, transparent 100%); }
   .step:last-child .step-connector { display: none; }
 
-  /* ── WHY SOLAR ── */
+  /* WHY SOLAR */
   #por-que { background: var(--sol-light); }
   .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; }
-  .benefit-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 36px;
-    box-shadow: 0 2px 16px var(--sombra);
-    transition: transform .2s, box-shadow .2s;
-    border-top: 4px solid transparent;
-  }
+  .benefit-card { background: #fff; border-radius: 20px; padding: 36px; box-shadow: 0 2px 16px var(--sombra); transition: transform .2s, box-shadow .2s; border-top: 4px solid transparent; }
   .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px var(--sombra); border-top-color: var(--sol); }
   .benefit-card.featured { background: var(--cielo); color: #fff; border-top-color: var(--sol); }
   .benefit-icon { font-size: 2.2rem; margin-bottom: 20px; }
-  .benefit-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--cielo);
-  }
+  .benefit-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: var(--cielo); }
   .benefit-card.featured h3 { color: #fff; }
   .benefit-card p { font-size: 0.9rem; line-height: 1.65; color: var(--gris); }
   .benefit-card.featured p { color: rgba(255,255,255,0.7); }
-
-  .reliability-banner {
-    margin-top: 40px;
-    background: var(--verde);
-    border-radius: 20px;
-    padding: 40px 48px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    max-width: 1100px;
-    color: #fff;
-  }
+  .reliability-banner { margin-top: 40px; background: var(--verde); border-radius: 20px; padding: 40px 48px; display: flex; align-items: center; gap: 32px; max-width: 1100px; color: #fff; }
   .reliability-banner .icon { font-size: 3rem; flex-shrink: 0; }
   .reliability-banner h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
   .reliability-banner p { font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.65; }
 
-  /* ── FINANCING ── */
+  /* FINANCING */
   #financiamiento { background: #fff; }
   .financing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1100px; align-items: center; }
   .loan-card { background: var(--cielo); border-radius: 24px; padding: 48px; color: #fff; }
   .loan-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 24px; color: var(--sol); }
   .loan-feature { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-  .loan-feature-icon {
-    width: 36px; height: 36px;
-    background: rgba(245,166,35,0.15);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; flex-shrink: 0;
-  }
+  .loan-feature-icon { width: 36px; height: 36px; background: rgba(245,166,35,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
   .loan-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
   .loan-feature p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
   .financing-text h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--cielo); margin-bottom: 16px; }
   .financing-text p { font-size: 0.95rem; color: var(--gris); line-height: 1.7; margin-bottom: 20px; }
-  .interest-note {
-    background: var(--verde-light);
-    border-left: 4px solid var(--verde);
-    border-radius: 0 12px 12px 0;
-    padding: 16px 20px;
-    margin-bottom: 28px;
-  }
+  .interest-note { background: var(--verde-light); border-left: 4px solid var(--verde); border-radius: 0 12px 12px 0; padding: 16px 20px; margin-bottom: 28px; }
   .interest-note p { font-size: 0.88rem; color: var(--verde); font-weight: 500; margin: 0; }
 
-  /* ── CONTACT ── */
+  /* CONTACT */
   #contacto { background: var(--cielo); text-align: center; padding: 100px 60px; }
   #contacto .section-tag { color: var(--sol); }
   #contacto .section-title { color: #fff; }
   #contacto .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 48px; }
-  .contact-form {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 24px;
-    padding: 48px;
-    max-width: 560px;
-    margin: 0 auto;
-    text-align: left;
-  }
+  .contact-form { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 48px; max-width: 560px; margin: 0 auto; text-align: left; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { margin-bottom: 20px; }
-  .form-group label {
-    display: block;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1.5px solid rgba(255,255,255,0.15);
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: #fff;
-    font-size: 0.95rem;
-    font-family: 'DM Sans', sans-serif;
-    outline: none;
-    transition: border-color .2s;
-    -webkit-appearance: none;
-  }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: rgba(255,255,255,0.07); border: 1.5px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 13px 16px; color: #fff; font-size: 0.95rem; font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .2s; -webkit-appearance: none; }
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--sol); }
   .form-group textarea { resize: vertical; min-height: 100px; }
   .form-group select option { background: var(--cielo-mid); }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #05172A;
-    padding: 48px 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
+  /* FOOTER */
+  footer { background: #05172A; padding: 48px 60px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
   footer .logo { font-size: 1.3rem; }
   footer p { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
 
-  /* ── ANIMATIONS ── */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  /* ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-  /* ── RESPONSIVE ── */
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     nav { padding: 24px 28px; }
     .nav-links { display: none; }
@@ -671,18 +248,24 @@
 </head>
 <body>
 
-<!-- ═══════════════ HERO ═══════════════ -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="sun-graphic"></div>
 
   <nav>
     <div class="logo">Riston<span> Paneeli</span></div>
-    <div class="nav-links">
-      <a href="#calculadora">Calculadora</a>
-      <a href="#por-que">¿Por qué solar?</a>
-      <a href="#financiamiento">Financiamiento</a>
-      <a href="#contacto">Contacto</a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#calculadora" data-es="Calculadora" data-en="Calculator">Calculadora</a>
+        <a href="#por-que" data-es="¿Por qué solar?" data-en="Why Solar?">¿Por qué solar?</a>
+        <a href="#financiamiento" data-es="Financiamiento" data-en="Financing">Financiamiento</a>
+        <a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a>
+      </div>
+      <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('es')">ES</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
     </div>
     <div class="hamburger" id="hamburger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
@@ -690,56 +273,58 @@
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#calculadora" onclick="toggleMenu()">Calculadora</a>
-    <a href="#por-que" onclick="toggleMenu()">¿Por qué solar?</a>
-    <a href="#financiamiento" onclick="toggleMenu()">Financiamiento</a>
-    <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+    <a href="#calculadora" onclick="toggleMenu()" data-es="Calculadora" data-en="Calculator">Calculadora</a>
+    <a href="#por-que" onclick="toggleMenu()" data-es="¿Por qué solar?" data-en="Why Solar?">¿Por qué solar?</a>
+    <a href="#financiamiento" onclick="toggleMenu()" data-es="Financiamiento" data-en="Financing">Financiamiento</a>
+    <a href="#contacto" onclick="toggleMenu()" data-es="Contacto" data-en="Contact">Contacto</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('es');toggleMenu()">ES</button>
+      <button class="lang-btn" onclick="setLang('en');toggleMenu()">EN</button>
+    </div>
   </div>
 
   <div class="hero-content">
     <div class="hero-badge">☀️ República Dominicana</div>
-    <h1>Tu techo genera<br><em>dinero cada día.</em></h1>
-    <p class="hero-sub">
-      Instala paneles solares y convierte el sol dominicano en ahorro real.
-      La electricidad sobrante va a la red y la recuperas cuando la necesitas —
-      como un banco de energía gratuito. Con financiamiento garantizado.
+    <h1 data-es="Tu techo genera<br><em>dinero cada día.</em>" data-en="Your roof generates<br><em>money every day.</em>">Tu techo genera<br><em>dinero cada día.</em></h1>
+    <p class="hero-sub" data-es="Instala paneles solares y convierte el sol dominicano en ahorro real. La electricidad sobrante va a la red y la recuperas cuando la necesitas — como un banco de energía gratuito. Con financiamiento garantizado." data-en="Install solar panels and turn the Dominican sun into real savings. Surplus electricity goes to the grid and you get it back when you need it — like a free energy bank. With guaranteed financing.">
+      Instala paneles solares y convierte el sol dominicano en ahorro real. La electricidad sobrante va a la red y la recuperas cuando la necesitas — como un banco de energía gratuito. Con financiamiento garantizado.
     </p>
     <div class="hero-ctas">
-      <a href="#calculadora" class="btn-primary">Calcular mi ahorro →</a>
-      <a href="#contacto" class="btn-secondary">Hablar con un asesor</a>
+      <a href="#calculadora" class="btn-primary" data-es="Calcular mi ahorro →" data-en="Calculate my savings →">Calcular mi ahorro →</a>
+      <a href="#contacto" class="btn-secondary" data-es="Hablar con un asesor" data-en="Speak with an advisor">Hablar con un asesor</a>
     </div>
   </div>
 
   <div class="stats-bar">
     <div class="stat-item">
       <div class="stat-num">6.3h</div>
-      <div class="stat-label">Horas de sol diarias promedio</div>
+      <div class="stat-label" data-es="Horas de sol diarias promedio" data-en="Average daily sun hours">Horas de sol diarias promedio</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">25 años</div>
-      <div class="stat-label">Garantía de rendimiento en paneles</div>
+      <div class="stat-num">25 <span data-es="años" data-en="years">años</span></div>
+      <div class="stat-label" data-es="Garantía de rendimiento en paneles" data-en="Panel performance warranty">Garantía de rendimiento en paneles</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">100%</div>
-      <div class="stat-label">Compensación por excedente (ley SIE-007-2026)</div>
+      <div class="stat-label" data-es="Compensación por excedente (ley SIE-007-2026)" data-en="Surplus compensation (law SIE-007-2026)">Compensación por excedente (ley SIE-007-2026)</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">0 imptos.</div>
-      <div class="stat-label">Exención aduanera equipos (Ley 57-07)</div>
+      <div class="stat-num">50%</div>
+      <div class="stat-label" data-es="Financiamiento disponible sobre el total" data-en="Financing available on total investment">Financiamiento disponible sobre el total</div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CALCULADORA ═══════════════ -->
+<!-- CALCULATOR -->
 <section id="calculadora">
-  <div class="section-tag">★ Calculadora solar</div>
-  <h2 class="section-title" style="color:#fff;">¿Cuánto puedes ahorrar?</h2>
-  <p class="section-sub">Ingresa tu consumo mensual y te mostramos el sistema ideal, el costo real y en cuánto tiempo recuperas tu inversión.</p>
+  <div class="section-tag" data-es="★ Calculadora solar" data-en="★ Solar Calculator">★ Calculadora solar</div>
+  <h2 class="section-title" style="color:#fff;" data-es="¿Cuánto puedes ahorrar?" data-en="How much can you save?">¿Cuánto puedes ahorrar?</h2>
+  <p class="section-sub" data-es="Ingresa tu consumo mensual y te mostramos el sistema ideal, el costo real y en cuánto tiempo recuperas tu inversión." data-en="Enter your monthly consumption and we'll show you the ideal system, the real cost, and how quickly you recover your investment.">Ingresa tu consumo mensual y te mostramos el sistema ideal, el costo real y en cuánto tiempo recuperas tu inversión.</p>
 
   <div class="calc-grid">
     <div class="calc-inputs">
       <div class="input-group">
-        <label>Consumo mensual promedio (kWh)</label>
+        <label data-es="Consumo mensual promedio (kWh)" data-en="Average monthly consumption (kWh)">Consumo mensual promedio (kWh)</label>
         <div class="input-wrapper">
           <input type="number" id="consumo" placeholder="ej. 450" min="50" max="5000" value="">
           <span>kWh</span>
@@ -750,209 +335,209 @@
         </div>
       </div>
       <div class="input-group">
-        <label>Tipo de cliente</label>
+        <label data-es="Tipo de cliente" data-en="Customer type">Tipo de cliente</label>
         <div class="input-wrapper">
           <select id="tipo-cliente">
-            <option value="residencial">Residencial (hogar)</option>
-            <option value="comercial">Comercial / negocio</option>
-            <option value="hotel">Hotel / hospedaje</option>
-            <option value="industrial">Industrial / manufactura</option>
+            <option value="residencial" data-es="Residencial (hogar)" data-en="Residential (home)">Residencial (hogar)</option>
+            <option value="comercial" data-es="Comercial / negocio" data-en="Commercial / business">Comercial / negocio</option>
+            <option value="hotel" data-es="Hotel / hospedaje" data-en="Hotel / accommodation">Hotel / hospedaje</option>
+            <option value="industrial" data-es="Industrial / manufactura" data-en="Industrial / manufacturing">Industrial / manufactura</option>
           </select>
         </div>
       </div>
       <div class="input-group">
-        <label>Tarifa eléctrica que pagas (RD$/kWh)</label>
+        <label data-es="Tarifa eléctrica que pagas (RD$/kWh)" data-en="Your electricity rate (RD$/kWh)">Tarifa eléctrica que pagas (RD$/kWh)</label>
         <div class="input-wrapper">
           <input type="number" id="tarifa" placeholder="ej. 7.50" step="0.1" value="7.50" min="3" max="20">
           <span>RD$</span>
         </div>
-        <small style="color:rgba(255,255,255,0.4);font-size:0.78rem;margin-top:6px;display:block;">Promedio residencial ~RD$7.50/kWh · Comercial ~RD$11/kWh</small>
+        <small id="tarifa-hint" style="color:rgba(255,255,255,0.4);font-size:0.78rem;margin-top:6px;display:block;" data-es="Promedio residencial ~RD$7.50/kWh · Comercial ~RD$11/kWh" data-en="Residential avg ~RD$7.50/kWh · Commercial ~RD$11/kWh">Promedio residencial ~RD$7.50/kWh · Comercial ~RD$11/kWh</small>
       </div>
       <div class="input-group">
-        <label>¿Quieres incluir batería de respaldo?</label>
+        <label data-es="¿Quieres incluir batería de respaldo?" data-en="Include backup battery?">¿Quieres incluir batería de respaldo?</label>
         <div class="input-wrapper">
           <select id="bateria">
-            <option value="basica">Sí – batería básica (8 kWh, ideal ante apagones)</option>
-            <option value="ampliada">Sí – batería ampliada (16 kWh, máxima autonomía)</option>
-            <option value="no">No por ahora</option>
+            <option value="basica" data-es="Sí – batería básica (8 kWh, ideal ante apagones)" data-en="Yes – basic battery (8 kWh, ideal for outages)">Sí – batería básica (8 kWh, ideal ante apagones)</option>
+            <option value="ampliada" data-es="Sí – batería ampliada (16 kWh, máxima autonomía)" data-en="Yes – extended battery (16 kWh, maximum autonomy)">Sí – batería ampliada (16 kWh, máxima autonomía)</option>
+            <option value="no" data-es="No por ahora" data-en="Not now">No por ahora</option>
           </select>
         </div>
       </div>
       <div class="input-group">
-        <label>Financiamiento deseado</label>
+        <label data-es="Financiamiento deseado" data-en="Desired financing">Financiamiento deseado</label>
         <div class="input-wrapper">
           <select id="financiamiento-tipo">
-            <option value="propio">Pago de contado (sin crédito)</option>
-            <option value="36">Préstamo a 3 años (36 meses)</option>
-            <option value="60">Préstamo a 5 años (60 meses)</option>
-            <option value="84">Préstamo a 7 años (84 meses)</option>
+            <option value="propio" data-es="Pago de contado (sin crédito)" data-en="Cash payment (no credit)">Pago de contado (sin crédito)</option>
+            <option value="36" data-es="Préstamo 50% a 3 años (36 meses)" data-en="50% loan over 3 years (36 months)">Préstamo 50% a 3 años (36 meses)</option>
+            <option value="60" data-es="Préstamo 50% a 5 años (60 meses)" data-en="50% loan over 5 years (60 months)">Préstamo 50% a 5 años (60 meses)</option>
+            <option value="84" data-es="Préstamo 50% a 7 años (84 meses)" data-en="50% loan over 7 years (84 months)">Préstamo 50% a 7 años (84 meses)</option>
           </select>
         </div>
       </div>
-      <button class="calc-btn" onclick="calcular()">☀️ Calcular mi sistema solar</button>
+      <button class="calc-btn" onclick="calcular()" data-es="☀️ Calcular mi sistema solar" data-en="☀️ Calculate my solar system">☀️ Calcular mi sistema solar</button>
     </div>
 
     <div class="calc-results" id="resultados">
       <div class="result-placeholder">
         <div class="ph-icon">☀️</div>
-        <p>Ingresa tu consumo mensual<br>y presiona <strong>Calcular</strong><br>para ver tu análisis personalizado.</p>
+        <p data-es="Ingresa tu consumo mensual<br>y presiona <strong>Calcular</strong><br>para ver tu análisis personalizado." data-en="Enter your monthly consumption<br>and press <strong>Calculate</strong><br>to see your personalized analysis.">Ingresa tu consumo mensual<br>y presiona <strong>Calcular</strong><br>para ver tu análisis personalizado.</p>
       </div>
     </div>
   </div>
-  <p style="color:rgba(255,255,255,0.3);font-size:0.78rem;margin-top:32px;">* Estimaciones basadas en precios de mercado 2025–2026. Cotización final según inspección técnica. Precios en USD.</p>
+  <p style="color:rgba(255,255,255,0.3);font-size:0.78rem;margin-top:32px;" data-es="* Estimaciones basadas en precios de mercado 2025–2026. Cotización final según inspección técnica. Precios en USD." data-en="* Estimates based on market prices 2025–2026. Final quote subject to technical inspection. Prices in USD.">* Estimaciones basadas en precios de mercado 2025–2026. Cotización final según inspección técnica. Precios en USD.</p>
 </section>
 
-<!-- ═══════════════ CÓMO FUNCIONA ═══════════════ -->
+<!-- HOW IT WORKS -->
 <section id="como-funciona">
-  <div class="section-tag">El proceso</div>
-  <h2 class="section-title">De cero a energía propia<br>en 4 pasos</h2>
-  <p class="section-sub">Sin complicaciones. Nosotros manejamos todo — desde el diseño hasta la conexión con la red eléctrica.</p>
+  <div class="section-tag" data-es="El proceso" data-en="The process">El proceso</div>
+  <h2 class="section-title" data-es="De cero a energía propia<br>en 4 pasos" data-en="From zero to your own energy<br>in 4 steps">De cero a energía propia<br>en 4 pasos</h2>
+  <p class="section-sub" data-es="Sin complicaciones. Nosotros manejamos todo — desde el diseño hasta la conexión con la red eléctrica." data-en="No complications. We handle everything — from design to grid connection.">Sin complicaciones. Nosotros manejamos todo — desde el diseño hasta la conexión con la red eléctrica.</p>
   <div class="steps-grid">
     <div class="step fade-in">
       <div class="step-num">01</div>
       <div class="step-icon">📋</div>
       <div class="step-connector"></div>
-      <h3>Evaluación gratuita</h3>
-      <p>Analizamos tu factura eléctrica, el área de tu techo y tu consumo. Te entregamos una propuesta técnica sin costo.</p>
+      <h3 data-es="Evaluación gratuita" data-en="Free evaluation">Evaluación gratuita</h3>
+      <p data-es="Analizamos tu factura eléctrica, el área de tu techo y tu consumo. Te entregamos una propuesta técnica sin costo." data-en="We analyze your electricity bill, roof area, and consumption. We deliver a technical proposal at no cost.">Analizamos tu factura eléctrica, el área de tu techo y tu consumo. Te entregamos una propuesta técnica sin costo.</p>
     </div>
     <div class="step fade-in" style="transition-delay:.1s">
       <div class="step-num">02</div>
       <div class="step-icon">⚙️</div>
       <div class="step-connector"></div>
-      <h3>Diseño e instalación</h3>
-      <p>Nuestros técnicos certificados instalan los paneles, el inversor y —si elegiste— las baterías de respaldo en 2–4 días.</p>
+      <h3 data-es="Diseño e instalación" data-en="Design & installation">Diseño e instalación</h3>
+      <p data-es="Nuestros técnicos certificados instalan los paneles, el inversor y —si elegiste— las baterías de respaldo en 2–4 días." data-en="Our certified technicians install the panels, inverter, and —if chosen— backup batteries in 2–4 days.">Nuestros técnicos certificados instalan los paneles, el inversor y —si elegiste— las baterías de respaldo en 2–4 días.</p>
     </div>
     <div class="step fade-in" style="transition-delay:.2s">
       <div class="step-num">03</div>
       <div class="step-icon">🔌</div>
       <div class="step-connector"></div>
-      <h3>Conexión a la red</h3>
-      <p>Tramitamos la conexión con tu distribuidora eléctrica bajo el programa de medición neta. Tu medidor gira hacia atrás cuando produces más de lo que consumes.</p>
+      <h3 data-es="Conexión a la red" data-en="Grid connection">Conexión a la red</h3>
+      <p data-es="Tramitamos la conexión con tu distribuidora eléctrica bajo el programa de medición neta. Tu medidor gira hacia atrás cuando produces más de lo que consumes." data-en="We process the connection with your electricity distributor under the net metering program. Your meter runs backwards when you produce more than you consume.">Tramitamos la conexión con tu distribuidora eléctrica bajo el programa de medición neta. Tu medidor gira hacia atrás cuando produces más de lo que consumes.</p>
     </div>
     <div class="step fade-in" style="transition-delay:.3s">
       <div class="step-num">04</div>
       <div class="step-icon">💰</div>
-      <h3>Ahorras desde el día 1</h3>
-      <p>Comienzas a ahorrar inmediatamente. El excedente de energía se acredita en tu factura al 100% según la nueva ley SIE-007-2026.</p>
+      <h3 data-es="Ahorras desde el día 1" data-en="Save from day 1">Ahorras desde el día 1</h3>
+      <p data-es="Comienzas a ahorrar inmediatamente. El excedente de energía se acredita en tu factura al 100% según la nueva ley SIE-007-2026." data-en="You start saving immediately. Surplus energy is credited to your bill at 100% under the new law SIE-007-2026.">Comienzas a ahorrar inmediatamente. El excedente de energía se acredita en tu factura al 100% según la nueva ley SIE-007-2026.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ POR QUÉ SOLAR ═══════════════ -->
+<!-- WHY SOLAR -->
 <section id="por-que">
-  <div class="section-tag">Argumentos clave</div>
-  <h2 class="section-title">El sol dominicano trabaja<br>para ti, no para la EDE</h2>
-  <p class="section-sub">La República Dominicana tiene 6+ horas de sol diario todo el año. Eso es dinero que hoy estás dejando ir.</p>
+  <div class="section-tag" data-es="Argumentos clave" data-en="Key benefits">Argumentos clave</div>
+  <h2 class="section-title" data-es="El sol dominicano trabaja<br>para ti, no para la EDE" data-en="The Dominican sun works<br>for you, not the utility">El sol dominicano trabaja<br>para ti, no para la EDE</h2>
+  <p class="section-sub" data-es="La República Dominicana tiene 6+ horas de sol diario todo el año. Eso es dinero que hoy estás dejando ir." data-en="The Dominican Republic has 6+ daily sun hours year-round. That's money you're leaving on the table.">La República Dominicana tiene 6+ horas de sol diario todo el año. Eso es dinero que hoy estás dejando ir.</p>
   <div class="benefits-grid">
     <div class="benefit-card fade-in">
       <div class="benefit-icon">📉</div>
-      <h3>Factura a casi cero</h3>
-      <p>Un sistema bien dimensionado puede reducir tu factura entre 70% y 95%. La electricidad sobrante se acredita — actúa como una cuenta de banco de energía.</p>
+      <h3 data-es="Factura a casi cero" data-en="Bill down to near zero">Factura a casi cero</h3>
+      <p data-es="Un sistema bien dimensionado puede reducir tu factura entre 70% y 95%. La electricidad sobrante se acredita — actúa como una cuenta de banco de energía." data-en="A well-sized system can reduce your bill by 70% to 95%. Surplus electricity is credited — it acts like an energy bank account.">Un sistema bien dimensionado puede reducir tu factura entre 70% y 95%. La electricidad sobrante se acredita — actúa como una cuenta de banco de energía.</p>
     </div>
     <div class="benefit-card featured fade-in" style="transition-delay:.1s">
       <div class="benefit-icon">🏦</div>
-      <h3>El grid como tu banco</h3>
-      <p>Durante el día produces más de lo que consumes. Ese excedente va a la red y lo recuperas de noche o cuando llueve. El 100% es tuyo gracias a la nueva ley dominicana (2026).</p>
+      <h3 data-es="El grid como tu banco" data-en="The grid as your bank">El grid como tu banco</h3>
+      <p data-es="Durante el día produces más de lo que consumes. Ese excedente va a la red y lo recuperas de noche o cuando llueve. El 100% es tuyo gracias a la nueva ley dominicana (2026)." data-en="During the day you produce more than you consume. That surplus goes to the grid and you get it back at night or when it rains. 100% yours under the new Dominican law (2026).">Durante el día produces más de lo que consumes. Ese excedente va a la red y lo recuperas de noche o cuando llueve. El 100% es tuyo gracias a la nueva ley dominicana (2026).</p>
     </div>
     <div class="benefit-card fade-in" style="transition-delay:.2s">
       <div class="benefit-icon">☀️</div>
-      <h3>Clima ideal todo el año</h3>
-      <p>No hay invierno. No hay meses sin sol. Tu sistema genera energía los 365 días del año con muy poco mantenimiento.</p>
+      <h3 data-es="Clima ideal todo el año" data-en="Perfect climate year-round">Clima ideal todo el año</h3>
+      <p data-es="No hay invierno. No hay meses sin sol. Tu sistema genera energía los 365 días del año con muy poco mantenimiento." data-en="No winter. No sunless months. Your system generates energy 365 days a year with very little maintenance.">No hay invierno. No hay meses sin sol. Tu sistema genera energía los 365 días del año con muy poco mantenimiento.</p>
     </div>
     <div class="benefit-card fade-in" style="transition-delay:.3s">
       <div class="benefit-icon">📈</div>
-      <h3>Mayor valor de tu propiedad</h3>
-      <p>Una propiedad con sistema solar vale entre 10% y 20% más. Es una inversión que puedes vender con tu casa o negocio.</p>
+      <h3 data-es="Mayor valor de tu propiedad" data-en="Higher property value">Mayor valor de tu propiedad</h3>
+      <p data-es="Una propiedad con sistema solar vale entre 10% y 20% más. Es una inversión que puedes vender con tu casa o negocio." data-en="A property with a solar system is worth 10% to 20% more. An investment you can sell with your home or business.">Una propiedad con sistema solar vale entre 10% y 20% más. Es una inversión que puedes vender con tu casa o negocio.</p>
     </div>
     <div class="benefit-card fade-in" style="transition-delay:.4s">
       <div class="benefit-icon">🌿</div>
-      <h3>Huella cero y reputación</h3>
-      <p>Los hoteles y negocios con energía solar atraen turistas conscientes y certificaciones internacionales de sostenibilidad.</p>
+      <h3 data-es="Huella cero y reputación" data-en="Zero footprint & reputation">Huella cero y reputación</h3>
+      <p data-es="Los hoteles y negocios con energía solar atraen turistas conscientes y certificaciones internacionales de sostenibilidad." data-en="Hotels and businesses with solar energy attract conscious tourists and international sustainability certifications.">Los hoteles y negocios con energía solar atraen turistas conscientes y certificaciones internacionales de sostenibilidad.</p>
     </div>
     <div class="benefit-card fade-in" style="transition-delay:.5s">
-      <div class="benefit-icon">🎁</div>
-      <h3>Incentivos fiscales del Estado</h3>
-      <p>La Ley 57-07 otorga exención del 100% de impuestos de importación en equipos solares. El Estado dominicano apoya esta transición.</p>
+      <div class="benefit-icon">💡</div>
+      <h3 data-es="Inversión de alto retorno" data-en="High-return investment">Inversión de alto retorno</h3>
+      <p data-es="El retorno de inversión solar supera ampliamente cualquier depósito bancario o inversión tradicional disponible en el mercado dominicano." data-en="Solar investment return far exceeds any bank deposit or traditional investment available in the Dominican market.">El retorno de inversión solar supera ampliamente cualquier depósito bancario o inversión tradicional disponible en el mercado dominicano.</p>
     </div>
   </div>
   <div class="reliability-banner fade-in">
     <div class="icon">🔋</div>
     <div>
-      <h3>¿Y los apagones? Tenemos la solución.</h3>
-      <p>Ofrecemos baterías de respaldo integradas al sistema solar. Cuando la red falla — y en RD sabemos que puede fallar — tus baterías entran automáticamente en segundos. Sin generador ruidoso, sin gasoil, sin cortes que dañen equipos. Para hogares: autonomía de 6–12 horas. Para hoteles: sistemas de respaldo que protegen operaciones críticas 24/7. <strong style="color:#fff;">La confiabilidad ya no es opcional — es parte del paquete.</strong></p>
+      <h3 data-es="¿Y los apagones? Tenemos la solución." data-en="What about blackouts? We have the solution.">¿Y los apagones? Tenemos la solución.</h3>
+      <p data-es="Ofrecemos baterías de respaldo integradas al sistema solar. Cuando la red falla — y en RD sabemos que puede fallar — tus baterías entran automáticamente en segundos. Sin generador ruidoso, sin gasoil, sin cortes que dañen equipos. Para hogares: autonomía de 6–12 horas. Para hoteles: sistemas de respaldo que protegen operaciones críticas 24/7. <strong style='color:#fff;'>La confiabilidad ya no es opcional — es parte del paquete.</strong>" data-en="We offer backup batteries integrated into the solar system. When the grid fails — and in DR we know it can — your batteries kick in automatically within seconds. No noisy generator, no diesel, no cuts that damage equipment. For homes: 6–12 hours of autonomy. For hotels: backup systems that protect critical operations 24/7. <strong style='color:#fff;'>Reliability is no longer optional — it's part of the package.</strong>">Ofrecemos baterías de respaldo integradas al sistema solar. Cuando la red falla — y en RD sabemos que puede fallar — tus baterías entran automáticamente en segundos. Sin generador ruidoso, sin gasoil, sin cortes que dañen equipos. Para hogares: autonomía de 6–12 horas. Para hoteles: sistemas de respaldo que protegen operaciones críticas 24/7. <strong style="color:#fff;">La confiabilidad ya no es opcional — es parte del paquete.</strong></p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FINANCIAMIENTO ═══════════════ -->
+<!-- FINANCING -->
 <section id="financiamiento">
-  <div class="section-tag">Financiamiento</div>
-  <h2 class="section-title">Paga con el ahorro<br>que el sistema genera</h2>
-  <p class="section-sub">No necesitas el capital completo hoy. Nuestro préstamo garantizado está diseñado para que tu cuota mensual sea menor que lo que ahorras en electricidad.</p>
+  <div class="section-tag" data-es="Financiamiento" data-en="Financing">Financiamiento</div>
+  <h2 class="section-title" data-es="Paga con el ahorro<br>que el sistema genera" data-en="Pay with the savings<br>the system generates">Paga con el ahorro<br>que el sistema genera</h2>
+  <p class="section-sub" data-es="Financiamos hasta el 50% de la inversión. El otro 50% requiere una entrada de contado. El préstamo está respaldado por garantía hipotecaria sobre bienes inmuebles." data-en="We finance up to 50% of the investment. The other 50% requires a cash down payment. The loan is backed by a mortgage guarantee on real estate property.">Financiamos hasta el 50% de la inversión. El otro 50% requiere una entrada de contado. El préstamo está respaldado por garantía hipotecaria sobre bienes inmuebles.</p>
   <div class="financing-grid">
     <div class="loan-card">
-      <h3>Préstamo Solar Garantizado</h3>
+      <h3 data-es="Préstamo Solar Garantizado" data-en="Guaranteed Solar Loan">Préstamo Solar Garantizado</h3>
       <div class="loan-feature">
         <div class="loan-feature-icon">🏠</div>
         <div>
-          <h4>Garantía hipotecaria o prendaria</h4>
-          <p>El mismo sistema solar sirve como garantía. Proceso simple y rápido.</p>
+          <h4 data-es="Garantía hipotecaria sobre inmueble" data-en="Mortgage guarantee on real estate">Garantía hipotecaria sobre inmueble</h4>
+          <p data-es="El préstamo cubre hasta el 50% del valor del sistema. Se requiere garantía hipotecaria sobre bien inmueble (no el sistema solar). El otro 50% se paga al contado antes de la instalación." data-en="The loan covers up to 50% of the system value. A mortgage guarantee on real estate is required (not the solar system itself). The other 50% is paid upfront before installation.">El préstamo cubre hasta el 50% del valor del sistema. Se requiere garantía hipotecaria sobre bien inmueble (no el sistema solar). El otro 50% se paga al contado antes de la instalación.</p>
         </div>
       </div>
       <div class="loan-feature">
         <div class="loan-feature-icon">📅</div>
         <div>
-          <h4>Plazos de 3 a 7 años</h4>
-          <p>Elige el plazo que mejor se adapta a tu flujo de caja. Cuotas fijas en USD o RD$.</p>
+          <h4 data-es="Plazos de 3 a 7 años" data-en="Terms from 3 to 7 years">Plazos de 3 a 7 años</h4>
+          <p data-es="Elige el plazo que mejor se adapta a tu flujo de caja. Cuotas fijas en USD o RD$." data-en="Choose the term that best suits your cash flow. Fixed installments in USD or RD$.">Elige el plazo que mejor se adapta a tu flujo de caja. Cuotas fijas en USD o RD$.</p>
         </div>
       </div>
       <div class="loan-feature">
         <div class="loan-feature-icon">💵</div>
         <div>
-          <h4>Tasas competitivas</h4>
-          <p>Trabajamos con tasas de 8%–12% anual según perfil. Mucho menos que el costo de seguir pagando la EDE.</p>
+          <h4 data-es="Tasas competitivas" data-en="Competitive rates">Tasas competitivas</h4>
+          <p data-es="Trabajamos con tasas de 8%–12% anual según perfil. Mucho menos que el costo de seguir pagando la EDE." data-en="We work with rates of 8%–12% per year depending on profile. Much less than the cost of continuing to pay the utility.">Trabajamos con tasas de 8%–12% anual según perfil. Mucho menos que el costo de seguir pagando la EDE.</p>
         </div>
       </div>
       <div class="loan-feature">
         <div class="loan-feature-icon">⚡</div>
         <div>
-          <h4>Aprobación en 5–7 días hábiles</h4>
-          <p>Proceso digitalizado. Mínima papelería. Comenzamos la instalación en cuanto aprueba.</p>
+          <h4 data-es="Aprobación en 5–7 días hábiles" data-en="Approval in 5–7 business days">Aprobación en 5–7 días hábiles</h4>
+          <p data-es="Proceso digitalizado. Mínima papelería. Comenzamos la instalación en cuanto aprueba." data-en="Digitized process. Minimal paperwork. We start installation as soon as approval comes.">Proceso digitalizado. Mínima papelería. Comenzamos la instalación en cuanto aprueba.</p>
         </div>
       </div>
       <div class="loan-feature">
         <div class="loan-feature-icon">🤝</div>
         <div>
-          <h4>Sin penalidad por pago anticipado</h4>
-          <p>Págalo antes si quieres. Sin costos ocultos, sin sorpresas.</p>
+          <h4 data-es="Sin penalidad por pago anticipado" data-en="No early repayment penalty">Sin penalidad por pago anticipado</h4>
+          <p data-es="Págalo antes si quieres. Sin costos ocultos, sin sorpresas." data-en="Pay it off early if you want. No hidden costs, no surprises.">Págalo antes si quieres. Sin costos ocultos, sin sorpresas.</p>
         </div>
       </div>
     </div>
     <div class="financing-text">
-      <h3>La lógica es simple:<br>el sol paga el préstamo.</h3>
-      <p>Imagina que hoy pagas <strong>RD$8,000 al mes</strong> en electricidad. Con nuestro sistema, tu factura baja a <strong>RD$800</strong>. Eso son RD$7,200 libres cada mes — más que suficiente para cubrir la cuota del préstamo.</p>
-      <p>En la mayoría de los casos, el flujo de caja es positivo desde el primer mes. No estás gastando dinero — estás moviendo dinero de la EDE a tu propio patrimonio.</p>
+      <h3 data-es="La lógica es simple:<br>el sol paga el préstamo." data-en="The logic is simple:<br>the sun pays the loan.">La lógica es simple:<br>el sol paga el préstamo.</h3>
+      <p data-es="Imagina que hoy pagas <strong>RD$8,000 al mes</strong> en electricidad. Con nuestro sistema, tu factura baja a <strong>RD$800</strong>. Eso son RD$7,200 libres cada mes — más que suficiente para cubrir la cuota del préstamo." data-en="Imagine you currently pay <strong>RD$8,000 per month</strong> in electricity. With our system, your bill drops to <strong>RD$800</strong>. That's RD$7,200 freed up each month — more than enough to cover the loan payment.">Imagina que hoy pagas <strong>RD$8,000 al mes</strong> en electricidad. Con nuestro sistema, tu factura baja a <strong>RD$800</strong>. Eso son RD$7,200 libres cada mes — más que suficiente para cubrir la cuota del préstamo.</p>
+      <p data-es="En la mayoría de los casos, el flujo de caja es positivo desde el primer mes. No estás gastando dinero — estás moviendo dinero de la EDE a tu propio patrimonio." data-en="In most cases, cash flow is positive from the first month. You're not spending money — you're moving money from the utility to your own wealth.">En la mayoría de los casos, el flujo de caja es positivo desde el primer mes. No estás gastando dinero — estás moviendo dinero de la EDE a tu propio patrimonio.</p>
       <div class="interest-note">
-        <p>💡 <strong>Tip financiero:</strong> Con tasas de entre 8% y 12%, y un sistema que te ahorra 70–90% en electricidad, el retorno de inversión supera cualquier depósito bancario disponible en RD hoy.</p>
+        <p data-es="💡 <strong>Tip financiero:</strong> Con tasas de entre 8% y 12%, y un sistema que te ahorra 70–90% en electricidad, el retorno de inversión supera cualquier depósito bancario disponible en RD hoy." data-en="💡 <strong>Financial tip:</strong> With rates between 8% and 12%, and a system that saves you 70–90% on electricity, the return on investment beats any bank deposit available in DR today.">💡 <strong>Tip financiero:</strong> Con tasas de entre 8% y 12%, y un sistema que te ahorra 70–90% en electricidad, el retorno de inversión supera cualquier depósito bancario disponible en RD hoy.</p>
       </div>
-      <a href="#contacto" class="btn-primary" style="display:inline-block;">Solicitar pre-aprobación →</a>
+      <a href="#contacto" class="btn-primary" style="display:inline-block;" data-es="Solicitar pre-aprobación →" data-en="Request pre-approval →">Solicitar pre-aprobación →</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ CONTACTO ═══════════════ -->
+<!-- CONTACT -->
 <section id="contacto">
-  <div class="section-tag">Contáctanos</div>
-  <h2 class="section-title">Empecemos hoy</h2>
-  <p class="section-sub">Completa el formulario y un asesor te contacta en menos de 24 horas. Sin compromiso.</p>
+  <div class="section-tag" data-es="Contáctanos" data-en="Contact us">Contáctanos</div>
+  <h2 class="section-title" data-es="Empecemos hoy" data-en="Let's start today">Empecemos hoy</h2>
+  <p class="section-sub" data-es="Completa el formulario y un asesor te contacta en menos de 24 horas. Sin compromiso." data-en="Fill out the form and an advisor will contact you within 24 hours. No commitment.">Completa el formulario y un asesor te contacta en menos de 24 horas. Sin compromiso.</p>
   <div class="contact-form">
     <div class="form-row">
       <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre">
+        <label data-es="Nombre" data-en="Name">Nombre</label>
+        <input type="text" data-placeholder-es="Tu nombre" data-placeholder-en="Your name" placeholder="Tu nombre">
       </div>
       <div class="form-group">
-        <label>Teléfono / WhatsApp</label>
+        <label data-es="Teléfono / WhatsApp" data-en="Phone / WhatsApp">Teléfono / WhatsApp</label>
         <input type="tel" placeholder="+1 (809) 000-0000">
       </div>
     </div>
@@ -961,58 +546,85 @@
       <input type="email" placeholder="tu@correo.com">
     </div>
     <div class="form-group">
-      <label>Tipo de propiedad</label>
+      <label data-es="Tipo de propiedad" data-en="Property type">Tipo de propiedad</label>
       <select>
-        <option>Residencia / Apartamento</option>
-        <option>Hotel / Resort</option>
-        <option>Negocio / Comercio</option>
-        <option>Industria / Fábrica</option>
-        <option>Otro</option>
+        <option data-es="Residencia / Apartamento" data-en="Residence / Apartment">Residencia / Apartamento</option>
+        <option data-es="Hotel / Resort" data-en="Hotel / Resort">Hotel / Resort</option>
+        <option data-es="Negocio / Comercio" data-en="Business / Commerce">Negocio / Comercio</option>
+        <option data-es="Industria / Fábrica" data-en="Industry / Factory">Industria / Fábrica</option>
+        <option data-es="Otro" data-en="Other">Otro</option>
       </select>
     </div>
     <div class="form-group">
-      <label>Zona / Provincia</label>
-      <input type="text" placeholder="ej. Santo Domingo, Punta Cana, Santiago...">
+      <label data-es="Zona / Provincia" data-en="Area / Province">Zona / Provincia</label>
+      <input type="text" data-placeholder-es="ej. Santo Domingo, Punta Cana, Santiago..." data-placeholder-en="e.g. Santo Domingo, Punta Cana, Santiago..." placeholder="ej. Santo Domingo, Punta Cana, Santiago...">
     </div>
     <div class="form-group">
-      <label>¿Alguna pregunta o comentario?</label>
-      <textarea placeholder="Cuéntanos un poco sobre tu proyecto..."></textarea>
+      <label data-es="¿Alguna pregunta o comentario?" data-en="Any questions or comments?">¿Alguna pregunta o comentario?</label>
+      <textarea data-placeholder-es="Cuéntanos un poco sobre tu proyecto..." data-placeholder-en="Tell us a bit about your project..." placeholder="Cuéntanos un poco sobre tu proyecto..."></textarea>
     </div>
-    <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="alert('¡Gracias! Te contactaremos pronto. 🌞')">
-      Enviar solicitud →
-    </button>
+    <button class="btn-primary" style="width:100%;font-size:1rem;" onclick="submitForm()" data-es="Enviar solicitud →" data-en="Send request →">Enviar solicitud →</button>
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="logo">Riston<span> Paneeli</span></div>
   <p>© 2026 Riston Paneeli · República Dominicana · Energía Solar Fotovoltaica</p>
-  <p style="color:rgba(255,255,255,0.25);">Ley 57-07 · SIE-007-2026-REG · Instaladores certificados</p>
+  <p style="color:rgba(255,255,255,0.25);">Ley 57-07 · SIE-007-2026-REG · <span data-es="Instaladores certificados" data-en="Certified installers">Instaladores certificados</span></p>
 </footer>
 
-<!-- ═══════════════ SCRIPT ═══════════════ -->
 <script>
+  // ── LANGUAGE ──
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
+    document.querySelectorAll('[data-es]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') return;
+      if (el.tagName === 'OPTION') { el.textContent = text; return; }
+      el.innerHTML = text;
+    });
+    document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
+      el.placeholder = el.getAttribute('data-placeholder-' + lang);
+    });
+    // Update calculator placeholder text
+    const ph = document.querySelector('.result-placeholder p');
+    if (ph) {
+      ph.innerHTML = lang === 'es'
+        ? 'Ingresa tu consumo mensual<br>y presiona <strong>Calcular</strong><br>para ver tu análisis personalizado.'
+        : 'Enter your monthly consumption<br>and press <strong>Calculate</strong><br>to see your personalized analysis.';
+    }
+  }
+
+  // ── HAMBURGER ──
   function toggleMenu() {
     document.getElementById('hamburger').classList.toggle('open');
     document.getElementById('mobileMenu').classList.toggle('open');
   }
 
+  // ── SLIDER ──
   const consumoInput = document.getElementById('consumo');
   const consumoSlider = document.getElementById('consumo-slider');
   consumoSlider.addEventListener('input', () => { consumoInput.value = consumoSlider.value; });
   consumoInput.addEventListener('input', () => {
-    if(consumoInput.value >= 50 && consumoInput.value <= 3000) consumoSlider.value = consumoInput.value;
+    if (consumoInput.value >= 50 && consumoInput.value <= 3000) consumoSlider.value = consumoInput.value;
   });
 
+  // ── CALCULATOR ──
   function calcular() {
     const consumo = parseFloat(document.getElementById('consumo').value) || 450;
     const tarifa = parseFloat(document.getElementById('tarifa').value) || 7.50;
     const bateria = document.getElementById('bateria').value;
     const financiamientoTipo = document.getElementById('financiamiento-tipo').value;
+    const L = currentLang;
 
-    const psh = 6.3;
-    const efficiency = 0.80;
+    const psh = 6.3, efficiency = 0.80;
     const kWpNeeded = (consumo / 30) / (psh * efficiency);
     const paneles = Math.ceil(kWpNeeded / 0.55);
     const kWpSystem = (paneles * 0.55).toFixed(2);
@@ -1022,79 +634,118 @@
     const costoEstructura = kWpNeeded * 1000 * 0.14;
     const costoInstalacion = kWpNeeded * 1000 * 0.20;
 
-    let costoBateria = 0;
-    let bateriaDesc = '';
-    if (bateria === 'basica') { costoBateria = 1800; bateriaDesc = 'Batería 8 kWh (respaldo ~6h)'; }
-    else if (bateria === 'ampliada') { costoBateria = 3400; bateriaDesc = 'Batería 16 kWh (respaldo ~12h)'; }
+    let costoBateria = 0, bateriaDesc = '';
+    if (bateria === 'basica') {
+      costoBateria = 1800;
+      bateriaDesc = L === 'es' ? 'Batería 8 kWh (respaldo ~6h)' : 'Battery 8 kWh (backup ~6h)';
+    } else if (bateria === 'ampliada') {
+      costoBateria = 3400;
+      bateriaDesc = L === 'es' ? 'Batería 16 kWh (respaldo ~12h)' : 'Battery 16 kWh (backup ~12h)';
+    }
 
     const costoTotal = costoPaneles + costoInversor + costoEstructura + costoInstalacion + costoBateria;
     const costoTotalRD = costoTotal * 58.5;
-    const facturaActual = consumo * tarifa;
-    const ahorroMensualRD = facturaActual * 0.80;
+    const ahorroMensualRD = consumo * tarifa * 0.80;
     const ahorroAnualUSD = (ahorroMensualRD * 12) / 58.5;
     const paybackYears = costoTotal / ahorroAnualUSD;
     const ahorro25USD = (ahorroAnualUSD * 25 - costoTotal).toFixed(0);
 
-    let cuotaMensual = null;
-    let cuotaLabel = '';
+    // Financing: max 50% of total
+    const montoFinanciado = costoTotal * 0.50;
+    const montoContado = costoTotal * 0.50;
+    let cuotaMensual = null, cuotaLabel = '', downLabel = '';
+
     if (financiamientoTipo !== 'propio') {
       const meses = parseInt(financiamientoTipo);
       const tasaMensual = 0.10 / 12;
-      cuotaMensual = costoTotal * (tasaMensual * Math.pow(1 + tasaMensual, meses)) / (Math.pow(1 + tasaMensual, meses) - 1);
-      cuotaLabel = `Cuota mensual a ${meses/12} años (10% anual)`;
+      cuotaMensual = montoFinanciado * (tasaMensual * Math.pow(1 + tasaMensual, meses)) / (Math.pow(1 + tasaMensual, meses) - 1);
+      cuotaLabel = L === 'es'
+        ? `Cuota mensual a ${meses/12} años (10% anual, 50% financiado)`
+        : `Monthly payment over ${meses/12} years (10% annual, 50% financed)`;
+      downLabel = L === 'es'
+        ? `Entrada requerida (50% al contado): USD $${Math.round(montoContado).toLocaleString()}`
+        : `Required down payment (50% cash): USD $${Math.round(montoContado).toLocaleString()}`;
     }
 
-    const paybackText = paybackYears < 1 ? `${Math.round(paybackYears * 12)} meses` : `${paybackYears.toFixed(1)} años`;
+    const paybackText = paybackYears < 1
+      ? `${Math.round(paybackYears * 12)} ${L === 'es' ? 'meses' : 'months'}`
+      : `${paybackYears.toFixed(1)} ${L === 'es' ? 'años' : 'years'}`;
+
+    const labels = {
+      paybackLabel: L === 'es' ? 'Recuperas tu inversión en' : 'You recover your investment in',
+      paybackSub: L === 'es' ? 'Luego, energía casi gratis por 20+ años' : 'Then, nearly free energy for 20+ years',
+      sysLabel: L === 'es' ? 'Sistema recomendado' : 'Recommended system',
+      invLabel: L === 'es' ? 'Inversión total estimada' : 'Total estimated investment',
+      savLabel: L === 'es' ? 'Ahorro mensual estimado' : 'Estimated monthly savings',
+      netLabel: L === 'es' ? 'Beneficio neto a 25 años' : 'Net benefit over 25 years',
+      afterLabel: L === 'es' ? 'después de recuperar inversión' : 'after recovering investment',
+      backupLabel: L === 'es' ? 'Respaldo incluido' : 'Backup included',
+      backupDesc: L === 'es' ? '— protección automática ante apagones' : '— automatic blackout protection',
+      cashLabel: L === 'es' ? '✅ Pago de contado' : '✅ Cash payment',
+      cashText: L === 'es'
+        ? `Recuperas tu inversión en <strong style="color:#5AE090;">${paybackText}</strong>. Luego, energía prácticamente gratis por 20+ años más.`
+        : `You recover your investment in <strong style="color:#5AE090;">${paybackText}</strong>. Then, virtually free energy for 20+ more years.`,
+      cashText2: L === 'es' ? '¿Prefieres financiamiento? Cámbialo arriba y recalcula.' : 'Prefer financing? Change it above and recalculate.',
+      mortgageNote: L === 'es'
+        ? '🏠 <strong>Nota:</strong> El préstamo requiere garantía hipotecaria sobre bien inmueble (distinto al sistema solar).'
+        : '🏠 <strong>Note:</strong> The loan requires a mortgage guarantee on real estate (separate from the solar system).',
+    };
 
     const financingHTML = cuotaMensual ? `
       <div class="financing-note">
         <h4>💳 ${cuotaLabel}</h4>
-        <div class="monthly-payment">USD $${cuotaMensual.toFixed(0)}/mes</div>
-        <p style="margin-top:8px;">Tu ahorro estimado es <strong style="color:#5AE090;">RD$${Math.round(ahorroMensualRD).toLocaleString()}/mes</strong> (≈USD $${Math.round(ahorroMensualRD/58.5)}) — superior a la cuota desde el primer mes.</p>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.55);margin-bottom:8px;">${downLabel}</div>
+        <div class="monthly-payment">USD $${cuotaMensual.toFixed(0)}/${L === 'es' ? 'mes' : 'mo'}</div>
+        <p style="margin-top:8px;">
+          ${L === 'es' ? 'Tu ahorro estimado es' : 'Your estimated savings are'} 
+          <strong style="color:#5AE090;">RD$${Math.round(ahorroMensualRD).toLocaleString()}/${L === 'es' ? 'mes' : 'mo'}</strong> 
+          (≈USD $${Math.round(ahorroMensualRD/58.5)}) — ${L === 'es' ? 'superior a la cuota desde el primer mes.' : 'higher than the monthly payment from day one.'}
+        </p>
+        <p style="margin-top:10px;font-size:0.82rem;color:rgba(255,255,255,0.5);">${labels.mortgageNote}</p>
       </div>` : `
       <div class="financing-note">
-        <h4>✅ Pago de contado</h4>
-        <p>Recuperas tu inversión en <strong style="color:#5AE090;">${paybackText}</strong>. Luego, energía prácticamente gratis por 20+ años más.</p>
-        <p style="margin-top:10px;">¿Prefieres financiamiento? Cámbialo arriba y recalcula.</p>
+        <h4>${labels.cashLabel}</h4>
+        <p>${labels.cashText}</p>
+        <p style="margin-top:10px;">${labels.cashText2}</p>
       </div>`;
 
     const bateriaHTML = bateria !== 'no' ? `
       <div class="result-card" style="grid-column:1/-1;">
         <div class="result-card-icon">🔋</div>
-        <div class="result-card-label">Respaldo incluido</div>
-        <div class="result-card-value" style="font-size:1rem;color:rgba(255,255,255,0.8);">${bateriaDesc} — protección automática ante apagones</div>
+        <div class="result-card-label">${labels.backupLabel}</div>
+        <div class="result-card-value" style="font-size:1rem;color:rgba(255,255,255,0.8);">${bateriaDesc} ${labels.backupDesc}</div>
       </div>` : '';
 
     document.getElementById('resultados').innerHTML = `
       <div class="result-hero">
-        <div class="result-hero-label">Recuperas tu inversión en</div>
+        <div class="result-hero-label">${labels.paybackLabel}</div>
         <div class="result-hero-value">${paybackText}</div>
-        <div class="result-hero-sub">Luego, energía casi gratis por 20+ años</div>
+        <div class="result-hero-sub">${labels.paybackSub}</div>
       </div>
       <div class="result-cards">
         <div class="result-card">
           <div class="result-card-icon">⚡</div>
-          <div class="result-card-label">Sistema recomendado</div>
+          <div class="result-card-label">${labels.sysLabel}</div>
           <div class="result-card-value accent">${kWpSystem} kWp</div>
-          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">${paneles} paneles de 550W</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">${paneles} ${L === 'es' ? 'paneles de' : 'panels of'} 550W</div>
         </div>
         <div class="result-card">
           <div class="result-card-icon">💵</div>
-          <div class="result-card-label">Inversión total estimada</div>
+          <div class="result-card-label">${labels.invLabel}</div>
           <div class="result-card-value">USD $${Math.round(costoTotal).toLocaleString()}</div>
           <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">≈ RD$ ${Math.round(costoTotalRD).toLocaleString()}</div>
         </div>
         <div class="result-card">
           <div class="result-card-icon">📉</div>
-          <div class="result-card-label">Ahorro mensual estimado</div>
+          <div class="result-card-label">${labels.savLabel}</div>
           <div class="result-card-value accent">RD$ ${Math.round(ahorroMensualRD).toLocaleString()}</div>
-          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">≈ USD $${Math.round(ahorroMensualRD/58.5)}/mes</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">≈ USD $${Math.round(ahorroMensualRD/58.5)}/${L === 'es' ? 'mes' : 'mo'}</div>
         </div>
         <div class="result-card">
           <div class="result-card-icon">🏆</div>
-          <div class="result-card-label">Beneficio neto a 25 años</div>
+          <div class="result-card-label">${labels.netLabel}</div>
           <div class="result-card-value accent">USD $${Number(ahorro25USD).toLocaleString()}</div>
-          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">después de recuperar inversión</div>
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.45);margin-top:4px;">${labels.afterLabel}</div>
         </div>
         ${bateriaHTML}
       </div>
@@ -1103,6 +754,11 @@
     document.getElementById('resultados').scrollIntoView({behavior:'smooth', block:'nearest'});
   }
 
+  function submitForm() {
+    alert(currentLang === 'es' ? '¡Gracias! Te contactaremos pronto. 🌞' : 'Thank you! We will contact you soon. 🌞');
+  }
+
+  // ── ANIMATIONS ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.15 });
